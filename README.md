@@ -13,8 +13,14 @@ All sensor data is published via **MQTT Autodiscovery** for seamless integration
 
 - The Barometer Pro S continuously broadcasts data over BLE.  
 - In this example, the ESP32-C3 is configured to **publish to MQTT every 5 seconds**.  
-- The publish interval can be modified in the source code.  
-
+- The publish interval can be modified in the source code.
+- 
+**PS:** According to the [official Qingping documentation](https://developer.qingping.co/), you can configure **private MQTT mode**.  
+However, based on testing:  
+- Once private MQTT is enabled, the **Qingping+ app** can no longer display data or modify settings.  
+- You will need to **reset the Qingping Barometer ProS (CGP23W)** to restore app functionality.  
+- The official Qingping+ app supports **offline buffering**, temporarily storing data when offline and uploading it once the device reconnects.  
+- If you want to **keep this offline history feature**, use this **BLE-to-MQTT bridge solution** instead of switching to private MQTT mode.  
 ---
 
 ## Features
@@ -66,7 +72,7 @@ All sensor data is published via **MQTT Autodiscovery** for seamless integration
    ```
 4. Replace with your **Barometer Pro S BLE MAC address**:  
    ```cpp
-   static const char* TARGET_BLE_ADDR = "58:2d:34:xx:xx:xx";
+   static const char* TARGET_BLE_ADDR = "AA:BB:CC:xx:xx:xx";
    ```
    You can find the MAC address in the **Qingping+ App → Device Info**.  
 5. Compile and flash to ESP32-C3.  
@@ -88,7 +94,7 @@ All sensor data is published via **MQTT Autodiscovery** for seamless integration
 Example BLE broadcast packet from Barometer Pro S:  
 
 ```
-== ADV == name="Qingping Barometer Pro S" addr=58:2d:34:83:e1:f0 rssi=-52
+== ADV == name="Qingping Barometer Pro S" addr=AA:BB:CC:DD:EE:f0 rssi=-52
 FDCD SD : 88 33 0C 54 84 34 2D 58 01 04 23 01 D2 01 02 01 64 07 02 58 27
 ```
 
