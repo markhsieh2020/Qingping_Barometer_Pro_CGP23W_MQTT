@@ -72,7 +72,7 @@ However, based on testing:
    ```
 4. Replace with your **Barometer Pro S BLE MAC address**:  
    ```cpp
-   static const char* TARGET_BLE_ADDR = "AA:BB:CC:xx:xx:xx";
+   static const char* TARGET_BLE_ADDR = "aa:bb:cc:dd:ee:ff";
    ```
    You can find the MAC address in the **Qingping+ App → Device Info**.  
 5. Compile and flash to ESP32-C3.  
