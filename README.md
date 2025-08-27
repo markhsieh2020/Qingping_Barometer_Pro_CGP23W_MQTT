@@ -53,7 +53,7 @@ All sensor data is published via **MQTT Autodiscovery** for seamless integration
 
 ## Installation
 1. Open this file in your browser:  
-   👉 [esp32c3_qingping_Barometer_mqtt.txt](https://github.com/markhsieh2020/Qingping_CO2_Temp_RH_MQTT/blob/main/esp32c3_qingping_co2_mqtt.txt)  
+   👉 [esp32c3_qingping_Barometer_mqtt.txt](https://github.com/markhsieh2020/Qingping_Barometer_Pro_CGP23W_MQTT/blob/main/esp32c3_qingping_Barometer_mqtt.txt)  
 2. Copy all the code inside the `.txt` file.  
 3. Update Wi-Fi and MQTT credentials:  
    ```cpp
