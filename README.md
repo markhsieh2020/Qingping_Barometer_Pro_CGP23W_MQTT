@@ -2,8 +2,8 @@
 
 **BLE-to-MQTT bridge for Qingping Temp & RH Monitor (Barometer) Pro S (CGP23W) using ESP32-C3, with full Home Assistant integration.**
 
-- 📌 For **Qingping CO₂ Temp RH (CGP22C)** setup, please refer to my other repository:  
-- 👉 [Qingping_CO2_Temp_RH_MQTT](https://github.com/markhsieh2020/Qingping_CO2_Temp_RH_MQTT)  
+- For **Qingping CO₂ Temp RH (CGP22C)** setup, please refer to my other repository:  
+- [Qingping_CO2_Temp_RH_MQTT](https://github.com/markhsieh2020/Qingping_CO2_Temp_RH_MQTT)  
 
 ---
 
@@ -59,7 +59,7 @@ However, based on testing:
 
 ## Installation
 1. Open this file in your browser:  
-   👉 [esp32c3_qingping_Barometer_mqtt.txt](https://github.com/markhsieh2020/Qingping_Barometer_Pro_CGP23W_MQTT/blob/main/esp32c3_qingping_Barometer_mqtt.txt)  
+   [esp32c3_qingping_Barometer_mqtt.txt](https://github.com/markhsieh2020/Qingping_Barometer_Pro_CGP23W_MQTT/blob/main/esp32c3_qingping_Barometer_mqtt.txt)  
 2. Copy all the code inside the `.txt` file.  
 3. Update Wi-Fi and MQTT credentials:  
    ```cpp
@@ -98,12 +98,38 @@ Example BLE broadcast packet from Barometer Pro S:
 FDCD SD : 88 33 0C 54 84 34 2D 58 01 04 23 01 D2 01 02 01 64 07 02 58 27
 ```
 
-### Decoded Values
-- Temperature: 29.1 °C  
-- Humidity: 46.6 %  
-- Battery: 100 %  
-- Pressure: 100.72 kPa  
-- RSSI: –52 dBm  
+
+## Breakdown
+- **Device ID**: `88 33 0C 54 84 34 2D 58` (ignored in parsing)  
+- **Temperature + Humidity**: `01 04 23 01 D2 01` → 29.1 °C / 46.6 %  
+- **Battery**: `02 01 64` → 100 %  
+- **Pressure**: `07 02 58 27` → 100.72 kPa  
+- **RSSI**: From scanner = –52 dBm  
+
+---
+
+##  Value Derivation (16-bit, little-endian)
+
+All sensor values are **16-bit (2 bytes)**, stored **Low Byte first, High Byte last**.  
+
+| Field       | Raw Bytes   | Decimal (LE) | Formula        | Final Value     |
+|-------------|-------------|--------------|----------------|-----------------|
+| Temperature | `23 01`     | 0x0123 = 291 | 291 ÷ 10       | **29.1 °C**     |
+| Humidity    | `D2 01`     | 0x01D2 = 466 | 466 ÷ 10       | **46.6 %**      |
+| Battery     | `64`        | 0x64 = 100   | —              | **100 %**       |
+| Pressure    | `58 27`     | 0x2758 = 10072 | 10072 ÷ 100 | **100.72 kPa**  |
+| RSSI        | (scanner)   | –52          | —              | **–52 dBm**     |
+
+ **Rule**: All multi-byte values are **16-bit, little-endian** (low byte first, high byte last).  
+
+---
+
+##  Final Decoded Values
+- Temperature: **29.1 °C**  
+- Humidity: **46.6 %**  
+- Battery: **100 %**  
+- Pressure: **100.72 kPa**  
+- RSSI: **–52 dBm**
 
 ---
 
