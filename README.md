@@ -11,7 +11,7 @@
 This project uses an **ESP32-C3 mini** as a BLE-to-MQTT bridge for the **Qingping Temp & RH Monitor (Barometer) Pro S**.  
 All sensor data is published via **MQTT Autodiscovery** for seamless integration with **Home Assistant**.
 
-- The Barometer Pro S continuously broadcasts data over BLE.  
+- The Barometer Pro S broadcasts BLE data roughly once per second.  
 - In this example, the ESP32-C3 is configured to **publish to MQTT every 5 seconds**.  
 - The publish interval can be modified in the source code.
 - 
