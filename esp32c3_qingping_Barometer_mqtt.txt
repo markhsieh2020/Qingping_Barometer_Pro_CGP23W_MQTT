@@ -98,7 +98,7 @@ PubSubClient client(net);
 Preferences  prefs;
 
 /* ===================【 BLE Target and Data Structure 】=================== */
-static const char* TARGET_BLE_ADDR = "AA:BB:CC:DD:EE:FF";   // Example BLE MAC
+static const char* TARGET_BLE_ADDR = "aa:bb:cc:dd:ee:ff";   // Example BLE MAC
 
 struct QingpingParsed {
   float temperature_c;
