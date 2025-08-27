@@ -94,7 +94,7 @@ However, based on testing:
 Example BLE broadcast packet from Barometer Pro S:  
 
 ```
-== ADV == name="Qingping Barometer Pro S" addr=AA:BB:CC:DD:EE:f0 rssi=-52
+== ADV == name="Qingping Barometer Pro S" addr=AA:BB:CC:DD:EE:FF rssi=-52
 FDCD SD : 88 33 0C 54 84 34 2D 58 01 04 23 01 D2 01 02 01 64 07 02 58 27
 ```
 
